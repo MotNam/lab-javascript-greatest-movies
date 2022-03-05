@@ -3,8 +3,11 @@
 
 const movies = require("./data");
 
-const newArray = movies.map (item => item.director);
-console.log (newArray);
+function getAllDirectors (dir) { 
+  const newArray = movies.map (item => item.director);
+  return newArray;
+};
+console.log (getAllDirectors(movies));
   
 
 
@@ -22,8 +25,8 @@ let noDupsArray = [];
   }
 });
 return noDupsArray;
-}
-console.log (cleanArray (newArray))
+};
+console.log (cleanArray (movies));
 
 
 
@@ -31,10 +34,12 @@ console.log (cleanArray (newArray))
 
 // ---> Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
 
-const howManyMovies = movies.filter (movies => movies.director.includes('Steven Spielberg')
-&& movies.genre.includes ('Drama'))
-
-console.log (howManyMovies);
+function howManyMovies(mov) {
+  const howManyMovies = movies.filter (movies => movies.director.includes('Steven Spielberg')
+&& movies.genre.includes ('Drama'));
+return howManyMovies;
+}
+console.log (howManyMovies(movies));
 
 
 
@@ -43,25 +48,32 @@ console.log (howManyMovies);
 
 //---> Iteration 3: All scores average - Get the average of all scores with 2 decimals
 
-const totalScore = movies.reduce ((acc, currentValue) => {
+function scoresAverage(scores) {
+  const totalScore = movies.reduce ((acc, currentValue) => {
   return acc += currentValue.score; 
 }, 0);
 const allAvg = totalScore / movies.length;  
-console.log (allAvg.toFixed(2));
+//console.log (allAvg.toFixed(2));
+return allAvg.toFixed(2);
+};
+
+console.log (scoresAverage(movies));
 
 
 
 
 //---> Iteration 4: Drama movies - Get the average of Drama Movies
 
-const DramaMovies = movies.filter (item => item.genre.includes("Drama"));
+function dramaMoviesScore(dram){
+const dramaMovies = movies.filter (item => item.genre.includes("Drama"));
 //console.log(DramaMovies);
-
-const DramaAvg = DramaMovies.reduce((acc, currentValue) => {
+const dramaAvg = dramaMovies.reduce((acc, currentValue) => {
   return acc += currentValue.score; 
-}, 0)/ DramaMovies.length;  
+}, 0) / dramaMovies.length;  
+return dramaAvg.toFixed(2);
+};
 
-console.log (DramaAvg.toFixed(2));
+console.log (dramaMoviesScore(movies));
 
 
 
@@ -70,7 +82,8 @@ console.log (DramaAvg.toFixed(2));
 //----> Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 //Create a function orderByYear() that receives an array as parameter and returns a new sorted array.
 //If two movies have the same year, order them in alphabetical order by their title! 
-const listByYear = movies.map (movie => {
+function orderByYear (year) {
+  const listByYear = movies.map (movie => {
   const listByYear = movie.year;
   const listByTitle = movie.title;
   return{
@@ -81,7 +94,9 @@ const listByYear = movies.map (movie => {
 const sortedList = listByYear.sort((a , b) => (a.year - b.year));
 //console.log(sortedList);
 const finalL = sortedList.sort();
-console.log(finalL);
+return finalL;
+}
+console.log (orderByYear(movies));
 
 
 
@@ -89,12 +104,13 @@ console.log(finalL);
 // --->Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 
 //List with titles only 
-const listOfTitles = movies.map(movie => {
+function orderAlphabetically (alpha) {
+  const listOfTitles = movies.map(movie => {
   const myList = movie.title;
   return {
     title: myList
   }
-})
+});
 //console.log(listOfTitles);
 
 //Get titles into Array
@@ -108,7 +124,10 @@ myNewList.sort();
 if (myNewList.length > 20 ){
   myNewList.length = 20 ;
 }
-console.log(myNewList);
+return myNewList;
+};
+
+console.log(orderAlphabetically(movies));
 
 
 
